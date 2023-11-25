@@ -13,13 +13,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px; /* Space between the image boxes */
+    gap: 50px; /* Space between the image boxes */
 }
 
 .image-container a {
     display: block;
-    width: 200px; /* Fixed width for each image container */
-    height: 200px; /* Fixed height for each image container */
+    width: 300px; /* Fixed width for each image container */
+    height: 300px; /* Fixed height for each image container */
     overflow: hidden; /* Ensures the image does not overflow the container */
     border-radius: 10px; /* Optional: for rounded corners */
 }
