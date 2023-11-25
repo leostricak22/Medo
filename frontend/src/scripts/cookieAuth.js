@@ -37,7 +37,7 @@ checkCookie();
 
 
 function validateCookie(cookieValue) {
-  fetch('http://10.42.129.183:5000/authentication/auth', {
+  fetch(backend_url+'/authentication/auth', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

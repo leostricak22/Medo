@@ -13,24 +13,23 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px; /* Space between the image boxes */
+    gap: 20px;
 }
 
 .image-container a {
     display: block;
-    width: 200px; /* Fixed width for each image container */
-    height: 200px; /* Fixed height for each image container */
-    overflow: hidden; /* Ensures the image does not overflow the container */
-    border-radius: 10px; /* Optional: for rounded corners */
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 10px;
 }
 
 .image-container img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures the image covers the container area */
+    object-fit: cover;
 }
 
-/* Responsive adjustments */
 @media screen and (max-width: 600px) {
     .image-container {
         flex-direction: column;
