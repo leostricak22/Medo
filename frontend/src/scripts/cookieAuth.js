@@ -54,7 +54,7 @@ function validateCookie(cookieValue) {
           console.log('Cookie is valid');
           redirect_to_dashboard()
         } else {
-          redirect_to_landing();
+          logout();
         }
       })
       .catch(error => {
