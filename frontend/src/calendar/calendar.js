@@ -2,6 +2,7 @@ var machine_type = [];
 var machinedata = [];
 var machinedataall;
 var patientsall;
+var selectedDate;
 
 $(document).ready(async function () {
 	var source =
@@ -13,8 +14,8 @@ $(document).ready(async function () {
 				{ name: 'location', type: 'string' },
 				{ name: 'subject', type: 'string' },
 				{ name: 'calendar', type: 'string' },
-				{ name: 'start', type: 'date' },
-				{ name: 'end', type: 'date' },
+				{ name: 'start', type: 'datetime' },
+				{ name: 'end', type: 'datetime' },
 				{ name: 'patient', type: 'string' }
 			],
 			id: 'id',
@@ -92,13 +93,17 @@ $(document).ready(async function () {
 
 	// JQXWINDOW - START
 	for(let i=0;i<sifrarnici_polja["Calendar"].length;i++) {
+		console.log(selectedDate)
 		$('#jqxgridCalendarUrediLxVParametarLxVschedule_datetime').jqxDateTimeInput({
 			theme: "arctic",
-			formatString: "dd.MM.yyyy",
+			formatString: "dd.MM.yyyy HH:mm",
 			width: '300px',
 			height: '18px',
-			culture: 'hr-HR'
+			culture: 'hr-HR',
+			value: selectedDate
 		});
+
+		$('#jqxgridCalendarUrediLxVParametarLxVschedule_datetime').val()
 
 		let durationdata = [
 			10,
@@ -161,12 +166,16 @@ $(document).ready(async function () {
 		modalOpacity: 0.1
 	});
 
+	$("#jqxgridCalendarpopupUredivanje").on("open", function () {
+		$('#jqxgridCalendarUrediLxVParametarLxVschedule_datetime').jqxDateTimeInput({value: selectedDate});
+	})
+
 	$("#jqxgridCalendarUredivanjeSave").on("click", async function (){
 		let data_to_send = {}
 		data_to_send["schedule_datetime"] = new Date($("#jqxgridCalendarUrediLxVParametarLxVschedule_datetime").val()).getTime()
 		data_to_send["patient_id"] = patientsall[$('#jqxgridCalendarUrediLxVParametarLxVpatient_id').jqxDropDownList("selectedIndex")].patient_id
 		data_to_send["machine_id"] = machinedataall[$('#jqxgridCalendarUrediLxVParametarLxVmachine_id').jqxDropDownList("selectedIndex")].machine_id
-		data_to_send["duration"] = 1
+		data_to_send["duration"] = $("#jqxgridCalendarUrediLxVParametarLxVduration").jqxDropDownList("selectedItem");
 
 		const response = await fetch(backend_url+"/schedule", {
 			method: "POST",
@@ -182,7 +191,7 @@ $(document).ready(async function () {
 		});
 
 		let obj = await response.json();
-		
+		$("#jqxgridCalendarpopupUredivanje").jqxWindow("close")
 	})
 	// UREDIVANJE / NOVO - PODEŠAVANJE POLJA - END
 
@@ -196,17 +205,13 @@ $(document).ready(async function () {
 		let dataRecord = $("#jqxgridCalendar").jqxGrid('getrowdata', editrow);
 		oldrow = dataRecord
 		for(let i=0;i<sifrarnici_polja["Calendar"].length;i++) {
-			let input_type = $('#jqxgridCalendarUrediLxVTekstLxV' + sifrarnici_polja["Calendar"][i]).attr("input-type")
-
 			$("#jqxgridCalendarUrediLxVParametarLxV" + sifrarnici_polja["Calendar"][i]).val(dataRecord[sifrarnici_polja["Calendar"][i]]);
 		}
 
 		$("#jqxgridCalendarpopupUredivanje").jqxWindow('open');
 	}
 
-	async function prozorDodajOtvori() {
-		//sakrij_podatke_label();
-
+	async function prozorDodajOtvori(arguments) {
 		otvoreni_sifrarnici.push("Calendar")
 
 		sifrarnici_mod_uredivanja_novo["Calendar"] = true;
@@ -223,9 +228,11 @@ $(document).ready(async function () {
 	// JQXWINDOW - END
 
 	$('#scheduler').on('cellClick', function (event) {
-		// Event triggered when a cell is clicked
 		var args = event.args;
-		prozorDodajOtvori();
+		prozorDodajOtvori(event.args);
+
+		let date=$(args.cell).data("date");
+		selectedDate = new Date(date);
 	});
 });
 
@@ -235,8 +242,8 @@ var newAppointment = {
 	location: "Conference Room",
 	subject: "Project Meeting",
 	calendar: "Work",
-	start: new Date(2023, 11, 25, 9, 0, 0),
-	end: new Date(2023, 11, 25, 10, 0, 0)
+	begin: new Date(2023, 11, 25, 4, 0, 0),
+	final: new Date(2023, 11, 25, 10, 0, 0)
 };
 
 $("#scheduler").jqxScheduler('addAppointment', newAppointment);
