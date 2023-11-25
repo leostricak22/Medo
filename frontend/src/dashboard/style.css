@@ -1,13 +1,19 @@
-body {
+body,
+html {
   margin: 0;
   padding: 0;
+
+  width: calc(100% - 100px);
+
+  min-height: 100%;
   font-family: "Arial", sans-serif;
   display: flex;
   background-color: #111115;
+  overflow-x: none;
 }
 
 #navbar {
-  height: 100%;
+  height: calc(100% - 20px);
   width: 150px;
   color: #fff;
   padding: 20px;
@@ -29,7 +35,7 @@ body {
 
 #navbar a:hover {
   background-color: #414141; /* Change background color on hover */
-  border-radius: 20%;
+  border-radius: 60%;
 }
 
 #dashboard-icon {
@@ -54,6 +60,7 @@ body {
 }
 
 #navbar a:last-child {
+  /* Align logout to the bottom while still having a bottom margin */
   margin-top: auto;
 }
 
@@ -65,11 +72,12 @@ body {
 }
 
 #content-wrapper {
-  background-color: #575757;
-  border-radius: 10%;
+  background-color: #efefef;
+  border-radius: 20px 20px 20px 20px;
   margin-left: 190px;
   margin-right: 20px;
-  height: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
   width: 100%; /* Calculate the width by subtracting the navbar width */
   flex: 1;
   display: flex;
@@ -78,25 +86,37 @@ body {
 }
 
 #content {
-  margin-top: 100px;
-  width: 100%;
+  width: 97%;
+  flex: 1;
   background-color: #fff; /* White background color for content div */
-  border-radius: 10%; /* Add border radius for rounded edges */
-  padding: 20px; /* Add padding for content div */
+  border-radius: 10px 10px 10px 10px;
   box-sizing: border-box; /* Include padding in the width */
+
+  margin: 0 auto; /* Center the content */
+}
+
+#content-wrapper h1 {
+  color: #414141;
+  width: 50%;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-left: 50px;
 }
 
 #user-image {
-  width: 40px;
-  height: 40px;
-  border-radius: 30%;
+  width: 60px;
+  height: 60px;
+  border-radius: 60%;
+  border: 5px solid rgb(74, 121, 208);
   cursor: pointer;
-  margin-top: 10px; /* Adjust this value as needed */
+  margin-top: 20px; /* Adjust this value as needed */
   position: fixed;
-  top: 10px;
-  right: 20px;
+  top: 0px;
+  right: 40px;
 }
 
 #user-image:hover {
-  filter: brightness(1.2);
+  opacity: 0.7;
 }

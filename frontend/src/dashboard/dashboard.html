@@ -1,15 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <script type="text/javascript" src="../scripts/global.js"></script>
-        <script type="text/javascript" src="../scripts/cookieAuth.js"></script>
-        <script type="text/javascript" src="../scripts/user.js"></script>
-    </head>
-    <body>
-        <h1>Dashboard</h1>
-        <button onclick="logout()">Logout</button>
-    </body>
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Example</title>
+  </head>
+  <body>
+    <div id="container">
+      <div id="navbar">
+        <a href="#" onclick="showDashboard">
+          <img
+            id="dashboard-icon"
+            src="images/Mali-leteci-8.png"
+            alt="Dashboard Icon"
+          />
+        </a>
+
+        <a href="#" onclick="showCalendar">
+          <img
+            id="calendar-icon"
+            src="images/Calendar.png"
+            alt="Calendar Icon"
+          />
+        </a>
+
+        <a href="#" onclick="showPatientView">
+          <img id="patient-icon" src="images/User.png" alt="Patient Icon" />
+        </a>
+
+        <a href="#" onclick="logout">
+          <img id="logout-icon" src="images/LogOut.png" alt="Logout Icon" />
+        </a>
+      </div>
+
+      <div id="content-wrapper">
+        <h1>Calendar</h1>
+        <img id="user-image" src="images/doctorSignIn.jpg" alt="User Image" />
+        <div id="content">
+          <div id="cal"></div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
