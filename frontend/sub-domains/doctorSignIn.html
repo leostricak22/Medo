@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      // This function will run on form submission
+      function handleLogin(event) {
+        // Prevent the default form submit action
+        event.preventDefault();
+
+        // Get the username and password from the form
+        const username = document.getElementById("doc-username").value;
+        const password = document.getElementById("doc-password").value;
+
+        // Send them to the server using fetch
+        fetch("http://10.42.129.183:5000/authentication/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username: username, password: password }), // Convert credentials to JSON
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data && data.cookie != "0") {
+              var expires = "";
+
+              var date = new Date();
+              date.setTime(date.getTime() + 30 * 24 * 60 * 60 * 1000);
+              expires = "; expires=" + date.toUTCString();
+
+              document.cookie =
+                "uuid" + "=" + data.cookie + expires + "; path=/";
+              window.location.replace("./dashboard.html");
+            } else console.log("login neuspjesno");
+            //TODO ispisati poruku o greski
+          })
+          .catch((error) => {
+            // Handle any errors here
+            console.error(
+              "There has been a problem with your fetch operation:",
+              error
+            );
+          });
+      }
+
+      // Add event listener on DOM content load
+      document.addEventListener("DOMContentLoaded", function () {
+        // Attach the event listener to the form
+        document.querySelector("form").addEventListener("submit", handleLogin);
+      });
+    </script>
+  </head>
+  <body>
+    <div class="login-container">
+      <!-- Doctor Login -->
+      <div class="login doctor-login">
+        <h2 class="center">Login</h2>
+        <form id="login-form" action="#" method="post">
+          <label for="doc-username">Username:</label>
+          <input type="text" id="doc-username" name="username" />
+
+          <label for="doc-password">Password:</label>
+          <input type="password" id="doc-password" name="password" />
+
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

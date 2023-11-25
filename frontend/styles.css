@@ -1,0 +1,38 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Space between the image boxes */
+}
+
+.image-container a {
+    display: block;
+    width: 200px; /* Fixed width for each image container */
+    height: 200px; /* Fixed height for each image container */
+    overflow: hidden; /* Ensures the image does not overflow the container */
+    border-radius: 10px; /* Optional: for rounded corners */
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the container area */
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 600px) {
+    .image-container {
+        flex-direction: column;
+    }
+}
