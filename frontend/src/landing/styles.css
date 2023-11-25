@@ -1,0 +1,133 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden; 
+}
+
+.background-slider {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; 
+    filter: blur();
+    opacity: 0.5;
+}
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0; /* Start with all images transparent */
+    animation: imageLoop 30s infinite; /* Total duration for one loop of all images */
+}
+
+.first-image {
+    background-image: url('./firstBackgroundImage.jpg'); /* Replace with your image path */
+    animation-delay: 0s; /* Start the animation immediately */
+}
+
+.second-image {
+    background-image: url('./cancerImage.jpg'); /* Replace with your image path */
+    animation-delay: 5s; /* Delay so each image shows for 10 seconds */
+}
+
+.third-image {
+    background-image: url('./cancerImage2.jpg'); /* Replace with your image path */
+    animation-delay: 10s; /* Delay so each image shows for 10 seconds */
+}
+
+.fourth-image{
+    background-image: url('./cancerImage7.jpg'); /* Replace with your image path */
+    animation-delay: 15s; /* Delay so each image shows for 10 seconds */
+}
+
+.fifth-image{
+    background-image: url('./cancerImage3.jpg'); /* Replace with your image path */
+    animation-delay: 20s; /* Delay so each image shows for 10 seconds */
+}
+
+.sixth-image{
+    background-image: url('./cancerImage5.jpg'); /* Replace with your image path */
+    animation-delay: 25s; /* Delay so each image shows for 10 seconds */
+}
+
+.seventh-image{
+    background-image: url('./cancerImage4.jpg'); /* Replace with your image path */
+    animation-delay: 30s; /* Delay so each image shows for 10 seconds */
+}
+
+
+@keyframes imageLoop {
+    0%, 100% {
+        opacity: 0;
+    }
+    5%, 33% {
+        opacity: 1; /* Fully visible for ~28% of the cycle */
+    }
+}
+
+.content {
+    position: relative;
+    z-index: 2; /* Ensure the content is above the background images */
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.image-container a {
+    display: block;
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media screen and (max-width: 600px) {
+    .image-container {
+        flex-direction: column;
+    }
+}
+
+
+  body.fade-in {
+    opacity: 0;
+    animation: fadeIn ease-in 0.5s;
+    animation-fill-mode: forwards;
+  }
+  
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  body.fade-out {
+    animation: fadeOut ease-out 0.5s;
+    animation-fill-mode: forwards;
+  }
+  
+  @keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  
