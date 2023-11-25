@@ -3,48 +3,12 @@ body {
     overflow: hidden;
 }
 
-thead {
-    border-bottom: 2px solid black;
+#scheduler {
+    width:100vw;
+    height: 100vh;
 }
 
-tbody {
-    height: 90vh; /* Adjust this value as needed */
-    overflow-y: auto;
-    display: block;
-    width: 100vw;
-}
-
-table.calendar {
-    width: 100%;
-    border: 1px black solid;
-    border-collapse: collapse;
-    table-layout: fixed;
-}
-
-td.titlecell {
-    border: 1px black solid;
-    border-collapse: collapse;
-}
-
-tr.titles {
-    height: 5vh;
-}
-
-tr.calrow {
-    border: 1px black solid;
-    border-collapse: collapse;
-    height: 120px;
-}
-
-td.datacell {
-    height: 50px;
-    width: 100vw;
-}
-
-tr:nth-child(n+3) {
-    background-color: transparent;
-}
-
-.timecell {
-    width: 20px;
+#scheduler .jqx-scheduler-time-view, .jqx-scheduler-time-column, jqx-disableselect {
+    /* Adjust the height of the row where the day of the month is displayed */
+    height: 20px;
 }
