@@ -106,11 +106,7 @@ $(document).ready(async function () {
 		$('#jqxgridCalendarUrediLxVParametarLxVschedule_datetime').val()
 
 		let durationdata = [
-			10,
-			15,
-			20,
-			25,
-			30
+			10, 15, 20, 30
 		];
 
 		const response = await fetch(backend_url+"/patients");
@@ -234,16 +230,20 @@ $(document).ready(async function () {
 		let date=$(args.cell).data("date");
 		selectedDate = new Date(date);
 	});
+
+
+	var newAppointment = {
+		id: "id123",
+		description: "Discuss project milestones",
+		location: "Conference Room",
+		subject: "Project Meeting",
+		calendar: "Work",
+		begin: new Date(2023, 11, 25, 4, 0, 0),
+		final: new Date(2023, 11, 25, 10, 0, 0)
+	};
+
+	newAppointment.onclick = function() {console.log("aaa");}
+
+	$("#scheduler").jqxScheduler('addAppointment', newAppointment);
+
 });
-
-var newAppointment = {
-	id: "id123",
-	description: "Discuss project milestones",
-	location: "Conference Room",
-	subject: "Project Meeting",
-	calendar: "Work",
-	begin: new Date(2023, 11, 25, 4, 0, 0),
-	final: new Date(2023, 11, 25, 10, 0, 0)
-};
-
-$("#scheduler").jqxScheduler('addAppointment', newAppointment);
