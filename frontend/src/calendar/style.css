@@ -1,14 +1,42 @@
 body {
     margin: 0;
+    padding: 0;
     overflow: hidden;
+    background-image: url('../landing/cancerImage.jpg'); /* Start with an initial image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: backgroundSlideshow 30s infinite alternate; /* Adjust time as needed */
+}
+
+@keyframes backgroundSlideshow {
+    0% { background-image: url('../landing/cancerImage2.jpg'); }
+    20% { background-image: url('../landing/cancerImage3.jpg'); }
+    40% { background-image: url('../landing/cancerImage4.jpg'); }
+    100% { background-image: url('../landing/cancerImage5.jpg'); }
 }
 
 #scheduler {
-    width:100vw;
-    height: 100vh;
+    width: 60vw; /* Adjust width to make it smaller */
+    height: 80vh; /* Adjust height as needed */
+    margin: 10vh auto; /* This centers the calendar in the middle of the page vertically and horizontally */
+    box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Optional: adds shadow for a "floating" effect */
+    background: rgba(255, 255, 255, 0.8); /* Optional: gives a translucent look */
+    border-radius: 15px; /* Optional: rounds the corners */
+    overflow-y: auto; /* Adds vertical scroll if the content is taller than the calendar */
 }
 
-#scheduler .jqx-scheduler-time-view, .jqx-scheduler-time-column, jqx-disableselect {
-    /* Adjust the height of the row where the day of the month is displayed */
-    height: 20px;
+/* This targets the specific classes within your scheduler for further customization */
+#scheduler .jqx-scheduler-time-view, .jqx-scheduler-time-column, .jqx-disableselect {
+    height: auto; /* Adjust as necessary */
 }
+
+/* If you have a header or footer, you can style them here */
+.header, .footer {
+    width: 100%;
+    position: fixed;
+    background: #fff; /* Adjust background color as needed */
+    /* More styles here */
+}
+
+/* Add additional styles for your form elements and buttons here */
