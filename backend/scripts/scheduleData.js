@@ -29,7 +29,7 @@ module.exports = {
         return result;
     },
     patients: async function () {
-        let sql = "SELECT * FROM patient_data;";
+        let sql = "SELECT patient_data.*,users.user_fname FROM patient_data inner join users on (patient_data.user_id = users.user_id) ;";
         let result = (await db_funct.db_select(sql, []));
         return result;
     }, insertPatient: async function (patient) {
@@ -37,7 +37,7 @@ module.exports = {
 
 
         await db_funct.db_select(query, [patient], (err, result) => {
-            if (err) {
+            if (err) {p
                 console.error('Error executing query: ' + err.stack);
                 res.status(500).send('Internal Server Error');
                 return;
