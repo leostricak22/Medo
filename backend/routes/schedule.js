@@ -39,8 +39,9 @@ router.get("/generateSchedule/:id", async function(req, res){
 
 router.get("/machines/:cancer_id", async function(req, res){
 	const cancerId = req.params.cancer_id;
+	console.log(cancerId)
 
-	let result=await scheduleDB.machines(cancerId);
+	let result=await scheduleDB.machinesCancer(cancerId);
     res.json(result);
 })
 

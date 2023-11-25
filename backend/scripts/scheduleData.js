@@ -44,6 +44,12 @@ module.exports = {
             }
             res.status(201).send('Patient created');
         });
+    }, machinesCancer: async function (cancer_id) {
+        let sql = `select machines.* from treatment_machines inner join cancer on (treatment_machines.cancer_id = cancer.cancer_id)
+        inner join machines on (treatment_machines.machine_id = machines.machine_id)
+        where cancer.cancer_id=?;`;
+        let result = (await db_funct.db_select(sql, [cancer_id]));
+        return result;
     },
 
 
