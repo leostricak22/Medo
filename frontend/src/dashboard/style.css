@@ -33,7 +33,7 @@ html {
   padding: 10px; /* Add padding for better clickability */
 }
 
-#navbar a:hover {
+#navbar a:hover:not(:first-child) {
   background-color: #414141; /* Change background color on hover */
   border-radius: 60%;
 }
@@ -119,4 +119,21 @@ html {
 
 #user-image:hover {
   opacity: 0.7;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+#scheduler {
+  width: 85vw;
+  height: 85vh;
+}
+
+#scheduler .jqx-scheduler-time-view,
+.jqx-scheduler-time-column,
+jqx-disableselect {
+  /* Adjust the height of the row where the day of the month is displayed */
+  height: 10px;
 }
