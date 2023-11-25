@@ -42,6 +42,8 @@ $(document).ready(async function () {
       fields.fromLabel.html("Start");
       fields.toLabel.html("End");
       fields.resourceLabel.html("Calendar");
+
+      fields.colorContainer.html("Patient");
     },
     editDialogOpen: function (dialog, fields, editAppointment) {},
     editDialogClose: function (dialog, fields, editAppointment) {},
@@ -251,16 +253,20 @@ $(document).ready(async function () {
     let date = $(args.cell).data("date");
     selectedDate = new Date(date);
   });
+
+  var newAppointment = {
+    id: "id123",
+    description: "Discuss project milestones",
+    location: "Conference Room",
+    subject: "Project Meeting",
+    calendar: "Work",
+    begin: new Date(2023, 11, 25, 4, 0, 0),
+    final: new Date(2023, 11, 25, 10, 0, 0),
+  };
+
+  newAppointment.onclick = function () {
+    console.log("aaa");
+  };
+
+  $("#scheduler").jqxScheduler("addAppointment", newAppointment);
 });
-
-var newAppointment = {
-  id: "id123",
-  description: "Discuss project milestones",
-  location: "Conference Room",
-  subject: "Project Meeting",
-  calendar: "Work",
-  begin: new Date(2023, 11, 25, 4, 0, 0),
-  final: new Date(2023, 11, 25, 10, 0, 0),
-};
-
-$("#scheduler").jqxScheduler("addAppointment", newAppointment);
