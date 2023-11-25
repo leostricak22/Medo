@@ -1,81 +1,9 @@
 var machine_type = [];
 var machinedata = [];
+var machinedataall;
+var patientsall;
 
 $(document).ready(async function () {
-	var appointments = new Array();
-
-	var appointment1 = {
-		id: "id1",
-		description: "George brings projector for presentations.",
-		location: "",
-		subject: "Fashion Expo",
-		calendar: "East Coast Events",
-		start: new Date(2023, 11, 25, 9, 0, 0),
-		end: new Date(2023, 11, 25, 16, 0, 0),
-		patient:"123"
-	}
-
-	var appointment2 = {
-		id: "id2",
-		description: "",
-		location: "",
-		subject: "Cloud Data Expo",
-		calendar: "Middle West Events",
-		start: new Date(2015, 10, 20, 10, 0, 0),
-		end: new Date(2015, 10, 22, 15, 0, 0),
-		patient:"123"
-	}
-
-	var appointment3 = {
-		id: "id3",
-		description: "",
-		location: "",
-		subject: "Digital Media Conference",
-		calendar: "West Coast Events",
-		start: new Date(2015, 10, 23, 11, 0, 0),
-		end: new Date(2015, 10, 28, 13, 0, 0),
-		patient:"123"
-	}
-
-	var appointment4 = {
-		id: "id4",
-		description: "",
-		location: "",
-		subject: "Modern Software Development Conference",
-		calendar: "West Coast Events",
-		start: new Date(2015, 10, 10, 16, 0, 0),
-		end: new Date(2015, 10, 12, 18, 0, 0),
-		patient:"123"
-	}
-
-	var appointment5 = {
-		id: "id5",
-		description: "",
-		location: "",
-		subject: "Marketing Future Expo",
-		calendar: "Middle West Events",
-		start: new Date(2015, 10, 5, 15, 0, 0),
-		end: new Date(2015, 10, 6, 17, 0, 0),
-		patient:"123"
-	}
-
-	var appointment6 = {
-		id: "id6",
-		description: "",
-		location: "",
-		subject: "Future Computing",
-		calendar: "East Coast Events",
-		start: new Date(2015, 10, 13, 14, 0, 0),
-		end: new Date(2015, 10, 20, 16, 0, 0),
-		patient:"123"
-	}
-	appointments.push(appointment1);
-	appointments.push(appointment2);
-	appointments.push(appointment3);
-	appointments.push(appointment4);
-	appointments.push(appointment5);
-	appointments.push(appointment6);
-
 	var source =
 		{
 			dataType: "array",
@@ -90,17 +18,19 @@ $(document).ready(async function () {
 				{ name: 'patient', type: 'string' }
 			],
 			id: 'id',
-			localData: appointments
+			localData: {}
 		};
 	var adapter = new $.jqx.dataAdapter(source);
 
-	var printButton = null;
-
-	$("#scheduler").jqxScheduler({
-		date: new $.jqx.date(2015,11,28),
+	let scheduler = $("#scheduler").jqxScheduler({
+		date: new $.jqx.date(),
 		width: $(window).width - 5,
 		height: $(window).height - 5,
 		source: adapter,
+		ready: function () {
+			// Disable double-click on time cells
+			$(".jqx-scheduler-time-cell, .jqx-scheduler-date-cell").off('dblclick');
+		},
 		showLegend: true,
 		editDialogCreate: function (dialog, fields, editAppointment) {
 			fields.repeatContainer.hide();
@@ -117,12 +47,6 @@ $(document).ready(async function () {
 
 		},
 		editDialogOpen: function (dialog, fields, editAppointment) {
-			if (!editAppointment && printButton) {
-				printButton.jqxButton({ disabled: true });
-			}
-			else if (editAppointment && printButton) {
-				printButton.jqxButton({ disabled: false });
-			}
 		},
 		editDialogClose: function (dialog, fields, editAppointment) {
 		},
@@ -185,7 +109,7 @@ $(document).ready(async function () {
 		];
 
 		const response = await fetch(backend_url+"/patients");
-		let patientsall = await response.json();
+		patientsall = await response.json();
 
 		let patients = [];
 
@@ -200,16 +124,15 @@ $(document).ready(async function () {
 			source: machinedata
 		});
 
-		$("#jqxgridCalendarUrediLxVParametarLxVmachine_id").on("open", async function (event) {
-			const response = await fetch(backend_url+"/schedule/machines/"+patients[$('#jqxgridCalendarUrediLxVParametarLxVpatient_id').jqxDropDownList("selectedIndex")].user_id);
-			let machinedataall = await response.json();
+		$("#jqxgridCalendarUrediLxVParametarLxVpatient_id").on("select", async function (event) {
+			const response = await fetch(backend_url+"/schedule/machines/"+patientsall[$('#jqxgridCalendarUrediLxVParametarLxVpatient_id').jqxDropDownList("selectedIndex")].cancer_id);
+			machinedataall = await response.json();
 
-
+			machinedata = [];
 			for(let i=0;i<machinedataall.length;i++) {
 				machinedata.push(machinedataall[i].machine_name);
 			}
 
-			console.log(backend_url+"/schedule/machines/"+patientsall[$('#jqxgridCalendarUrediLxVParametarLxVpatient_id').jqxDropDownList("selectedIndex")].cancer_id)
 			console.log(machinedata)
 
 			$('#jqxgridCalendarUrediLxVParametarLxVmachine_id').jqxDropDownList({
@@ -237,12 +160,34 @@ $(document).ready(async function () {
 		cancelButton: $("#jqxgridCalendarUredivanjeCancel"),
 		modalOpacity: 0.1
 	});
+
+	$("#jqxgridCalendarUredivanjeSave").on("click", async function (){
+		let data_to_send = {}
+		data_to_send["schedule_datetime"] = new Date($("#jqxgridCalendarUrediLxVParametarLxVschedule_datetime").val()).getTime()
+		data_to_send["patient_id"] = patientsall[$('#jqxgridCalendarUrediLxVParametarLxVpatient_id').jqxDropDownList("selectedIndex")].patient_id
+		data_to_send["machine_id"] = machinedataall[$('#jqxgridCalendarUrediLxVParametarLxVmachine_id').jqxDropDownList("selectedIndex")].machine_id
+		data_to_send["duration"] = 1
+
+		const response = await fetch(backend_url+"/schedule", {
+			method: "POST",
+			mode: "cors",
+			cache: "no-cache",
+			credentials: "same-origin",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			redirect: "follow",
+			referrerPolicy: "no-referrer",
+			body: JSON.stringify(data_to_send),
+		});
+
+		let obj = await response.json();
+		
+	})
 	// UREDIVANJE / NOVO - PODEŠAVANJE POLJA - END
 
 	// UREĐIVANJE / NOVO - OTVORI PROZOR - START
 	async function prozorUredivanjeOtvori(rowindex) {
-		//sakrij_podatke_label();
-
 		otvoreni_sifrarnici.push("Calendar")
 
 		sifrarnici_mod_uredivanja_novo["Calendar"] = false;
@@ -253,14 +198,9 @@ $(document).ready(async function () {
 		for(let i=0;i<sifrarnici_polja["Calendar"].length;i++) {
 			let input_type = $('#jqxgridCalendarUrediLxVTekstLxV' + sifrarnici_polja["Calendar"][i]).attr("input-type")
 
-			$("#jqxgridCalendarUrediLxVParametarLxV" + sifrarnici_polja[sifrarnik_id][i]).val(dataRecord[sifrarnici_polja["Calendar"][i]]);
-
-			/*if((input_type == "date" || input_type == "datetime") && dataRecord[sifrarnici_polja[sifrarnik_id][i]] !== "") {
-				$("#jqxgridCalendarUrediLxVParametarLxV" + sifrarnici_polja[sifrarnik_id][i]).jqxDateTimeInput('setDate', LimexDatumParseHRV(dataRecord[sifrarnici_polja[sifrarnik_id][i]]));
-			}*/
+			$("#jqxgridCalendarUrediLxVParametarLxV" + sifrarnici_polja["Calendar"][i]).val(dataRecord[sifrarnici_polja["Calendar"][i]]);
 		}
 
-		// show the popup window.
 		$("#jqxgridCalendarpopupUredivanje").jqxWindow('open');
 	}
 
@@ -270,7 +210,7 @@ $(document).ready(async function () {
 		otvoreni_sifrarnici.push("Calendar")
 
 		sifrarnici_mod_uredivanja_novo["Calendar"] = true;
-		$("#jqxgridCalendarpopupUredivanjeNaslov").html("Novi unos");
+		$("#jqxgridCalendarpopupUredivanjeNaslov").html("New entry");
 		editrow = -1;
 
 		for(let i=0;i<sifrarnici_polja["Calendar"].length;i++) {
@@ -288,3 +228,15 @@ $(document).ready(async function () {
 		prozorDodajOtvori();
 	});
 });
+
+var newAppointment = {
+	id: "id123",
+	description: "Discuss project milestones",
+	location: "Conference Room",
+	subject: "Project Meeting",
+	calendar: "Work",
+	start: new Date(2023, 11, 25, 9, 0, 0),
+	end: new Date(2023, 11, 25, 10, 0, 0)
+};
+
+$("#scheduler").jqxScheduler('addAppointment', newAppointment);
