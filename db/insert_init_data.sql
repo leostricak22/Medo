@@ -88,3 +88,43 @@ INSERT INTO `medo`.`treatment_machines`(`machine_id`,`cancer_id`)VALUES(5,7);
 INSERT INTO `medo`.`treatment_machines`(`machine_id`,`cancer_id`)VALUES(5,8);
 INSERT INTO `medo`.`treatment_machines`(`machine_id`,`cancer_id`)VALUES(5,9);
 INSERT INTO `medo`.`treatment_machines`(`machine_id`,`cancer_id`)VALUES(5,10);
+
+--
+INSERT INTO `medo`.`patient_data`
+(
+`user_id`,
+`cancer_id`,
+`dob`,
+`height`,
+`weight`,
+`gender`,
+`treatment_start`,
+`treatment_done`,
+`cancer_severity`)
+VALUES
+(
+'0825f8f6-8b29-11ee-a84b-a8934a4a638e',
+1,
+'1986-03-05',
+180,
+87,
+'m',
+now(),
+false,
+0);
+
+
+INSERT INTO `medo`.`schedule`
+(
+`schedule_datetime`,
+`patient_id`,
+`machine_id`,
+`duration`,
+`attended`)
+VALUES
+(
+unix_timestamp(),
+1,
+1,
+30,
+false);
