@@ -28,6 +28,23 @@ module.exports = {
         let result = (await db_funct.db_select(sql, [patient_id]))[0];
         return result;
     },
+    patients: async function () {
+        let sql = "SELECT * FROM patient_data;";
+        let result = (await db_funct.db_select(sql, []));
+        return result;
+    }, insertPatient: async function (patient) {
+        let query = 'INSERT INTO patient_data SET ?';
+
+
+        await db_funct.db_select(query, [patient], (err, result) => {
+            if (err) {
+                console.error('Error executing query: ' + err.stack);
+                res.status(500).send('Internal Server Error');
+                return;
+            }
+            res.status(201).send('Patient created');
+        });
+    },
 
 
 }
