@@ -50,6 +50,18 @@ module.exports = {
         where cancer.cancer_id=?;`;
         let result = (await db_funct.db_select(sql, [cancer_id]));
         return result;
+    },insertSchedule: async function (schedule) {
+        let query = 'INSERT INTO schedule SET ?';
+
+
+        await db_funct.db_select(query, [schedule], (err, result) => {
+            if (err) {p
+                console.error('Error executing query: ' + err.stack);
+                res.status(500).send('Internal Server Error');
+                return;
+            }
+            res.status(201).send('Schedule created');
+        });
     },
 
 
