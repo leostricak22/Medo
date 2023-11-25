@@ -1,0 +1,50 @@
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+thead {
+    border-bottom: 2px solid black;
+}
+
+tbody {
+    height: 90vh; /* Adjust this value as needed */
+    overflow-y: auto;
+    display: block;
+    width: 100vw;
+}
+
+table.calendar {
+    width: 100%;
+    border: 1px black solid;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+td.titlecell {
+    border: 1px black solid;
+    border-collapse: collapse;
+}
+
+tr.titles {
+    height: 5vh;
+}
+
+tr.calrow {
+    border: 1px black solid;
+    border-collapse: collapse;
+    height: 120px;
+}
+
+td.datacell {
+    height: 50px;
+    width: 100vw;
+}
+
+tr:nth-child(n+3) {
+    background-color: transparent;
+}
+
+.timecell {
+    width: 20px;
+}

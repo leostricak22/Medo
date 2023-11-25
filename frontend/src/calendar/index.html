@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <table class="calendar" id="calendar">
+      <thead>
+        <tr class="titles">
+          <th class="timecell">
+            <div style="display: flex">
+              <button onclick="weekbefore()"><</button>
+              <button onclick="weekafter()">></button>
+            </div>
+          </th>
+          <th class="titlecell" id="titlecell0"></th>
+          <th class="titlecell" id="titlecell1"></th>
+          <th class="titlecell" id="titlecell2"></th>
+          <th class="titlecell" id="titlecell3"></th>
+          <th class="titlecell" id="titlecell4"></th>
+          <th class="titlecell" id="titlecell5"></th>
+          <th class="titlecell" id="titlecell6"></th>
+        </tr>
+        <tr class="titles">
+          <th class="timecell"></th>
+          <th class="titlecell">Monday</th>
+          <th class="titlecell">Tuesday</th>
+          <th class="titlecell">Wednesday</th>
+          <th class="titlecell">Thursday</th>
+          <th class="titlecell">Friday</th>
+          <th class="titlecell">Saturday</th>
+          <th class="titlecell">Sunday</th>
+        </tr>
+      </thead>
+      <tbody id="calendarbody">
+      </tbody>
+    </table>
+    <script type="text/javascript" src="calendar.js"></script>
+  </body>
+</html>

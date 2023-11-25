@@ -1,5 +1,5 @@
 CREATE TABLE schedule (
-    schedule_id INT PRIMARY KEY,
+    schedule_id INT PRIMARY KEY auto_increment,
     schedule_datetime int,
     patient_id INT,
     machine_id INT,

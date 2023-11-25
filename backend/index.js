@@ -16,8 +16,10 @@ app.use(body_parser.json());
 
 const reservation_route = require("./routes/reservation")
 const authentication_route = require("./routes/authentication")
+const schedule_route = require("./routes/schedule")
 
 app.use("/reservation", reservation_route)
 app.use("/authentication", authentication_route)
+app.use("/schedule", schedule_route)
 
 app.listen(PORT)
