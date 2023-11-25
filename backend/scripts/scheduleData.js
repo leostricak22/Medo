@@ -22,4 +22,12 @@ module.exports = {
         let result = (await db_funct.db_select(sql, [user_id]))[0];
         return result;
     },
+
+    generateSchedule: async function (patient_id) {
+        let sql = "call sp_generate_patient_schedule(?) ";
+        let result = (await db_funct.db_select(sql, [patient_id]))[0];
+        return result;
+    },
+
+
 }

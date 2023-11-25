@@ -29,6 +29,12 @@ router.get("/:id", async function(req, res){
 	let result=await scheduleDB.scheduleForUser(patientId["patient_id"]);
     res.json(result);
 })
+router.get("/generateSchedule/:id", async function(req, res){
+    const userId = req.params.id;
+	let patientId=await scheduleDB.getPatientId(userId);
 
+	let result=await scheduleDB.generateSchedule(patientId["patient_id"]);
+    res.json(result);
+})
 
 module.exports = router;
