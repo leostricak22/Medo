@@ -1,4 +1,7 @@
-$(document).ready(function () {
+var machine_type = [];
+var machinedata = [];
+
+$(document).ready(async function () {
 	var appointments = new Array();
 
 	var appointment1 = {
@@ -95,8 +98,8 @@ $(document).ready(function () {
 
 	$("#scheduler").jqxScheduler({
 		date: new $.jqx.date(2015,11,28),
-		width: 850,
-		height: 600,
+		width: $(window).width - 5,
+		height: $(window).height - 5,
 		source: adapter,
 		showLegend: true,
 		editDialogCreate: function (dialog, fields, editAppointment) {
@@ -150,5 +153,138 @@ $(document).ready(function () {
 				'weekView',
 				'monthView'
 			]
+	});
+
+	// DOBIVANJE POLJA ŠIFRARNIKA
+	let polja_trenutnog_sifrarnika = []
+	$("#calendarWindow").find('[id*="UrediLxVParametarLxV"]').each(function() {
+		polja_trenutnog_sifrarnika.push($(this).attr("id").split("UrediLxVParametarLxV")[1]);
+	});
+
+	sifrarnici_polja["Calendar"] = polja_trenutnog_sifrarnika
+	if(!sifrarnici_odabir["Calendar"])
+		sifrarnici_odabir["Calendar"] = {}
+
+
+	// JQXWINDOW - START
+	for(let i=0;i<sifrarnici_polja["Calendar"].length;i++) {
+		$('#jqxgridCalendarUrediLxVParametarLxVschedule_datetime').jqxDateTimeInput({
+			theme: "arctic",
+			formatString: "dd.MM.yyyy",
+			width: '300px',
+			height: '18px',
+			culture: 'hr-HR'
+		});
+
+		let durationdata = [
+			10,
+			15,
+			20,
+			25,
+			30
+		];
+
+		const response = await fetch(backend_url+"/patients");
+		let patientsall = await response.json();
+
+		let patients = [];
+
+		for(let i=0;i<patientsall.length;i++) {
+			patients.push(patientsall[i].user_fname);
+		}
+
+		$('#jqxgridCalendarUrediLxVParametarLxVpatient_id').jqxDropDownList({
+			source: patients
+		});
+		$('#jqxgridCalendarUrediLxVParametarLxVmachine_id').jqxDropDownList({
+			source: machinedata
+		});
+
+		$("#jqxgridCalendarUrediLxVParametarLxVmachine_id").on("open", async function (event) {
+			const response = await fetch(backend_url+"/schedule/machines/"+patients[$('#jqxgridCalendarUrediLxVParametarLxVpatient_id').jqxDropDownList("selectedIndex")].user_id);
+			let machinedataall = await response.json();
+
+
+			for(let i=0;i<machinedataall.length;i++) {
+				machinedata.push(machinedataall[i].machine_name);
+			}
+
+			console.log(backend_url+"/schedule/machines/"+patientsall[$('#jqxgridCalendarUrediLxVParametarLxVpatient_id').jqxDropDownList("selectedIndex")].cancer_id)
+			console.log(machinedata)
+
+			$('#jqxgridCalendarUrediLxVParametarLxVmachine_id').jqxDropDownList({
+				source: machinedata
+			});
+		})
+
+		$('#jqxgridCalendarUrediLxVParametarLxVduration').jqxDropDownList({
+			source: durationdata
+		});
+	}
+
+	for(let i=0;i<$(".LimexSifrarnik").length;i++) {
+		let naziv_baze = $(".LimexSifrarnik")[i].onclick.toString().split("sifrarnik_prozor_dodaj('")[1].split("'")[0]
+	}
+
+	$("#jqxgridCalendarUredivanjeCancel").jqxButton();
+	$("#jqxgridCalendarUredivanjeSave").jqxButton();
+	$("#jqxgridCalendarpopupUredivanje").jqxWindow({
+		width: 500,
+		height: 300,
+		resizable: true,
+		isModal: true,
+		autoOpen: false,
+		cancelButton: $("#jqxgridCalendarUredivanjeCancel"),
+		modalOpacity: 0.1
+	});
+	// UREDIVANJE / NOVO - PODEŠAVANJE POLJA - END
+
+	// UREĐIVANJE / NOVO - OTVORI PROZOR - START
+	async function prozorUredivanjeOtvori(rowindex) {
+		//sakrij_podatke_label();
+
+		otvoreni_sifrarnici.push("Calendar")
+
+		sifrarnici_mod_uredivanja_novo["Calendar"] = false;
+		$("#jqxgridCalendarpopupUredivanjeNaslov").html("Uređivanje");
+		let editrow = rowindex;
+		let dataRecord = $("#jqxgridCalendar").jqxGrid('getrowdata', editrow);
+		oldrow = dataRecord
+		for(let i=0;i<sifrarnici_polja["Calendar"].length;i++) {
+			let input_type = $('#jqxgridCalendarUrediLxVTekstLxV' + sifrarnici_polja["Calendar"][i]).attr("input-type")
+
+			$("#jqxgridCalendarUrediLxVParametarLxV" + sifrarnici_polja[sifrarnik_id][i]).val(dataRecord[sifrarnici_polja["Calendar"][i]]);
+
+			/*if((input_type == "date" || input_type == "datetime") && dataRecord[sifrarnici_polja[sifrarnik_id][i]] !== "") {
+				$("#jqxgridCalendarUrediLxVParametarLxV" + sifrarnici_polja[sifrarnik_id][i]).jqxDateTimeInput('setDate', LimexDatumParseHRV(dataRecord[sifrarnici_polja[sifrarnik_id][i]]));
+			}*/
+		}
+
+		// show the popup window.
+		$("#jqxgridCalendarpopupUredivanje").jqxWindow('open');
+	}
+
+	async function prozorDodajOtvori() {
+		//sakrij_podatke_label();
+
+		otvoreni_sifrarnici.push("Calendar")
+
+		sifrarnici_mod_uredivanja_novo["Calendar"] = true;
+		$("#jqxgridCalendarpopupUredivanjeNaslov").html("Novi unos");
+		editrow = -1;
+
+		for(let i=0;i<sifrarnici_polja["Calendar"].length;i++) {
+			$('#jqxgridCalendarUrediLxVParametarLxV' + sifrarnici_polja["Calendar"][i]).val("");
+		}
+
+		$("#jqxgridCalendarpopupUredivanje").jqxWindow('open');
+	}
+
+	// JQXWINDOW - END
+
+	$('#scheduler').on('cellClick', function (event) {
+		// Event triggered when a cell is clicked
+		var args = event.args;
+		prozorDodajOtvori();
 	});
 });
