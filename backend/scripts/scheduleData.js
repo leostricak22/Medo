@@ -13,7 +13,10 @@ module.exports = {
         return result;
     },
     schedules: async function () {
-        let sql = "SELECT * from schedule order by schedule_datetime desc";
+        let sql = `SELECT users.user_fname,schedule.*
+        from schedule
+        inner join patient_data on (schedule.patient_id = patient_data.patient_id)
+        inner join users on (patient_data.user_id=users.user_id)`;
         let result = (await db_funct.db_select(sql, []));
         return result;
     },
