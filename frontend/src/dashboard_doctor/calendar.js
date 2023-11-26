@@ -27,6 +27,9 @@ $(document).ready(async function () {
         end: new Date((appointments[i].schedule_datetime*1000)+(appointments[i].duration*60*1000))
       };
 
+      $('#scheduler').jqxScheduler('view', 'dayView');
+      $('#scheduler').jqxScheduler('view', 'weekView');
+
       $("#scheduler").jqxScheduler("addAppointment", appointment);
       $("#scheduler").on("appointmentClick", function (event) {
         console.log("a");
@@ -159,9 +162,11 @@ $(document).ready(async function () {
 
     $("#jqxgridCalendarUrediLxVParametarLxVpatient_id").jqxDropDownList({
       source: patients,
+      autoDropDownHeight: true
     });
     $("#jqxgridCalendarUrediLxVParametarLxVmachine_id").jqxDropDownList({
       source: machinedata,
+      autoDropDownHeight: true
     });
 
     $("#jqxgridCalendarUrediLxVParametarLxVpatient_id").on(
@@ -193,6 +198,7 @@ $(document).ready(async function () {
 
     $("#jqxgridCalendarUrediLxVParametarLxVduration").jqxDropDownList({
       source: durationdata,
+      autoDropDownHeight: true
     });
   }
 
