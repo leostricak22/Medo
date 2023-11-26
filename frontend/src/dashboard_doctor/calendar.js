@@ -5,36 +5,37 @@ var patientsall;
 var selectedDate;
 var appointments;
 
-async function get_all_appointments() {
-  const response = await fetch(backend_url + "/schedule");
-  let result = await response.json();
-
-  return result;
-}
-
-async function set_appointments(appointments) {
-  for(let i=0;i<appointments.length();i++) {
-    let appointment = {
-      id: appointments[i].schedule_id,
-      description: "Discuss project milestones",
-      location: "Conference Room",
-      subject: "Project Meeting",
-      calendar: "Work",
-      start: new Date(2023, 11 - 1, 26, 4, 0, 0),
-      end: new Date(2023, 11 - 1, 26, 10, 0, 0),
-      editable: false
-    };
-
-    $("#scheduler").jqxScheduler("addAppointment", newAppointment);
-    $("#scheduler").on("appointmentClick", function (event) {
-      console.log("a");
-      prozorUredivanjeOtvori()
-      return false;
-    });
-  }
-}
-
 $(document).ready(async function () {
+  async function get_all_appointments() {
+    const response = await fetch(backend_url + "/schedule");
+    let result = await response.json();
+
+    return result;
+  }
+
+  async function set_appointments(appointments) {
+    console.log(new Date(appointments[0].schedule_datetime*1000))
+    console.log(new Date(appointments[0].schedule_datetime*1000+appointments[0].duration*60*1000))
+    for(let i=0;i<appointments.length;i++) {
+      let appointment = {
+        id: appointments[i].schedule_id,
+        description: "Discuss project milestones",
+        location: "Conference Room",
+        subject: "Project Meeting",
+        calendar: "Work",
+        start: new Date(appointments[i].schedule_datetime*1000),
+        end: new Date((appointments[i].schedule_datetime*1000)+(appointments[i].duration*60*1000))
+      };
+
+      $("#scheduler").jqxScheduler("addAppointment", appointment);
+      $("#scheduler").on("appointmentClick", function (event) {
+        console.log("a");
+        prozorUredivanjeOtvori()
+        return false;
+      });
+    }
+  }
+
   var source = {
     dataType: "array",
     dataFields: [
@@ -301,6 +302,6 @@ $(document).ready(async function () {
     selectedDate = new Date(date);
   });
 
-  appointments = get_all_appointments();
+  appointments = await get_all_appointments();
   set_appointments(appointments);
 });
