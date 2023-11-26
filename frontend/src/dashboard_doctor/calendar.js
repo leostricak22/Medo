@@ -3,6 +3,36 @@ var machinedata = [];
 var machinedataall;
 var patientsall;
 var selectedDate;
+var appointments;
+
+async function get_all_appointments() {
+  const response = await fetch(backend_url + "/schedule");
+  let result = await response.json();
+
+  return result;
+}
+
+async function set_appointments(appointments) {
+  for(let i=0;i<appointments.length();i++) {
+    let appointment = {
+      id: appointments[i].schedule_id,
+      description: "Discuss project milestones",
+      location: "Conference Room",
+      subject: "Project Meeting",
+      calendar: "Work",
+      start: new Date(2023, 11 - 1, 26, 4, 0, 0),
+      end: new Date(2023, 11 - 1, 26, 10, 0, 0),
+      editable: false
+    };
+
+    $("#scheduler").jqxScheduler("addAppointment", newAppointment);
+    $("#scheduler").on("appointmentClick", function (event) {
+      console.log("a");
+      prozorUredivanjeOtvori()
+      return false;
+    });
+  }
+}
 
 $(document).ready(async function () {
   var source = {
@@ -65,6 +95,25 @@ $(document).ready(async function () {
     },
     view: "weekView",
     views: ["dayView", "weekView", "monthView"],
+  });
+
+  var today = new Date();
+  today.setHours(0, 0, 0, 0); // Reset time part for accurate comparison
+
+  // Assuming you have the jqxScheduler initialized and its id is 'scheduler'
+  $("#scheduler").on('rendering', function (event) {
+    var cells = $('#scheduler').find('.jqx-scheduler-cell'); // or the appropriate selector for cells
+
+    cells.each(function () {
+      var cellDate = new Date($(this).attr('data-date')); // Assuming each cell has a 'data-date' attribute
+      cellDate.setHours(0, 0, 0, 0);
+
+      if (cellDate.getTime() === today.getTime()) {
+        // Apply selection style or logic
+        $(this).addClass('selected-cell'); // Example: adding a custom class
+        // Other logic to indicate selection can go here
+      }
+    });
   });
 
   // DOBIVANJE POLJA ŠIFRARNIKA
@@ -211,18 +260,16 @@ $(document).ready(async function () {
   // UREDIVANJE / NOVO - PODEŠAVANJE POLJA - END
 
   // UREĐIVANJE / NOVO - OTVORI PROZOR - START
-  async function prozorUredivanjeOtvori(rowindex) {
+  async function prozorUredivanjeOtvori(appointment_id) {
     otvoreni_sifrarnici.push("Calendar");
 
     sifrarnici_mod_uredivanja_novo["Calendar"] = false;
     $("#jqxgridCalendarpopupUredivanjeNaslov").html("Uređivanje");
-    let editrow = rowindex;
-    let dataRecord = $("#jqxgridCalendar").jqxGrid("getrowdata", editrow);
-    oldrow = dataRecord;
+
     for (let i = 0; i < sifrarnici_polja["Calendar"].length; i++) {
       $(
           "#jqxgridCalendarUrediLxVParametarLxV" + sifrarnici_polja["Calendar"][i]
-      ).val(dataRecord[sifrarnici_polja["Calendar"][i]]);
+      ).val("");
     }
 
     $("#jqxgridCalendarpopupUredivanje").jqxWindow("open");
@@ -254,19 +301,6 @@ $(document).ready(async function () {
     selectedDate = new Date(date);
   });
 
-  var newAppointment = {
-    id: "id123",
-    description: "Discuss project milestones",
-    location: "Conference Room",
-    subject: "Project Meeting",
-    calendar: "Work",
-    begin: new Date(2023, 11, 25, 4, 0, 0),
-    final: new Date(2023, 11, 25, 10, 0, 0),
-  };
-
-  newAppointment.onclick = function () {
-    console.log("aaa");
-  };
-
-  $("#scheduler").jqxScheduler("addAppointment", newAppointment);
+  appointments = get_all_appointments();
+  set_appointments(appointments);
 });
