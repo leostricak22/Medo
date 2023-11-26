@@ -13,10 +13,11 @@ module.exports = {
         return result;
     },
     schedules: async function () {
-        let sql = `SELECT users.user_fname,schedule.*
+        let sql = `SELECT users.user_fname,machines.color_hex,schedule.*
         from schedule
         inner join patient_data on (schedule.patient_id = patient_data.patient_id)
-        inner join users on (patient_data.user_id=users.user_id)`;
+        inner join users on (patient_data.user_id=users.user_id)
+        inner join machines on (schedule.machine_id = machines.machine_id)`;
         let result = (await db_funct.db_select(sql, []));
         return result;
     },
