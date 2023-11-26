@@ -12,6 +12,11 @@ module.exports = {
         let result = (await db_funct.db_select(sql, []));
         return result;
     },
+    schedules: async function () {
+        let sql = "SELECT * from schedule order by schedule_datetime desc";
+        let result = (await db_funct.db_select(sql, []));
+        return result;
+    },
     scheduleForUser: async function (patient_id) {
         let sql = "SELECT * from schedule where patient_id = ? ";
         let result = (await db_funct.db_select(sql, [patient_id]));
@@ -23,9 +28,9 @@ module.exports = {
         return result;
     },
 
-    generateSchedule: async function (patient_id) {
-        let sql = "call sp_generate_patient_schedule(?) ";
-        let result = (await db_funct.db_select(sql, [patient_id]))[0];
+    generateSchedule: async function (patient_id,duration) {
+        let sql = "call sp_generate_patient_schedule(?,?) ";
+        let result = (await db_funct.db_select(sql, [patient_id,duration]))[0];
         return result;
     },
     patients: async function () {
