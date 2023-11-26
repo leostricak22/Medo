@@ -1,242 +1,262 @@
-<div id="SplitterSIFIDGlavni" style="min-height: 500px">
-  <div>
-    <!--GRID START-->
-    <div id="jqxgridSIFID"></div>
-    <!--GRID END-->
-  </div>
-  <div>
-    <!--OPCIJE ISPOD GRIDA START-->
-    <div
-      id="jqxgridSIFIDOpcije"
-      style="
-        overflow: hidden;
-        position: relative;
-        display: none;
-        width: 100%;
-        background-color: #e5e5e5;
-        padding: 1px;
-        border-top: 1px solid #cccccc;
-        border-bottom: 1px solid #cccccc;
-      "
-    >
-      <div id="jqxgridSIFIDgumbDodaj" class="lmxjqxbuttonleft">
-        <img
-          style="position: relative; margin-top: 2px"
-          src="../../public/images/icons/add.png"
-        /><span class="lmxjqxbuttonspantext">Dodaj</span>
-      </div>
-      <div id="jqxgridSIFIDgumbUredi" class="lmxjqxbuttonleft">
-        <img
-          style="position: relative; margin-top: 2px"
-          src="../../public/images/icons/expander.png"
-        /><span class="lmxjqxbuttonspantext">Uredi</span>
-      </div>
-      <div id="jqxgridSIFIDgumbObrisi" class="lmxjqxbuttonleft">
-        <img
-          style="position: relative; margin-top: 2px"
-          src="../../public/images/icons/close.png"
-        /><span class="lmxjqxbuttonspantext">Obriši</span>
-      </div>
-      <div id="jqxgridSIFIDgumbIspisi" class="lmxjqxbuttonleft">
-        <img
-          style="position: relative; margin-top: 2px"
-          src="../../public/images/icons/card.png"
-        /><span class="lmxjqxbuttonspantext">Ispiši</span>
-      </div>
-      <div
-        id="jqxgridSIFIDStatus"
-        style="float: right; margin-right: 5px"
-      ></div>
-      <div id="jqxgridSIFIDgumbOdaberi" class="lmxjqxbuttonright">
-        <img
-          style="position: relative; margin-top: 2px"
-          src="../../images/CheckBox.png"
-        /><span class="lmxjqxbuttonspantext">Odaberi</span>
-      </div>
-    </div>
-    <!--OPCIJE ISPOD GRIDA END-->
-  </div>
-</div>
-
-<!--NOVO / UREDIVANJE PROZOR START-->
-<form id="jqxgridSIFIDpopupUredivanjeForma" action="./">
-  <div id="jqxgridSIFIDpopupUredivanje" style="display: none">
-    <div id="jqxgridSIFIDpopupUredivanjeNaslov">Uređivanje</div>
-    <div style="overflow: hidden">
-      <table>
-        <tr style="display: none">
-          <td align="right" id="jqxgridSIFIDUrediLxVTekstLxVpatient_id">
-            Patient ID
-          </td>
-          <td align="left">
-            <input id="jqxgridSIFIDUrediLxVParametarLxVpatient_id" />
-          </td>
-        </tr>
-        <tr>
-          <td align="right" id="jqxgridSIFIDUrediLxVTekstLxVcancer_id">
-            Cancer ID
-          </td>
-          <td align="left">
-            <input
-              id="jqxgridSIFIDUrediLxVParametarLxVcancer_id"
-              class="NextNaEnter"
-            />
-          </td>
-        </tr>
-        <tr>
-          <td
-            align="right"
-            id="jqxgridSIFIDUrediLxVTekstLxVdob"
-            input-type="date"
-          >
-            dob
-          </td>
-          <td align="left">
-            <input
-              id="jqxgridSIFIDUrediLxVParametarLxVdob"
-              class="NextNaEnter"
-            />
-          </td>
-        </tr>
-        <tr>
-          <td align="right" id="jqxgridSIFIDUrediLxVTekstLxVheight">Height</td>
-          <td align="left">
-            <input
-              id="jqxgridSIFIDUrediLxVParametarLxVheight"
-              class="NextNaEnter"
-            />
-          </td>
-        </tr>
-        <tr>
-          <td align="right" id="jqxgridSIFIDUrediLxVTekstLxVweight">Weight</td>
-          <td align="left">
-            <input
-              id="jqxgridSIFIDUrediLxVParametarLxVweight"
-              class="NextNaEnter"
-            />
-          </td>
-        </tr>
-        <tr>
-          <td align="right" id="jqxgridSIFIDUrediLxVTekstLxVtreatment_start">
-            Treatment start
-          </td>
-          <td align="left">
-            <input
-              id="jqxgridSIFIDUrediLxVParametarLxVtreatment_start"
-              class="NextNaEnter"
-            />
-          </td>
-        </tr>
-        <tr>
-          <td align="right" id="jqxgridSIFIDUrediLxVTekstLxVtreatment_done">
-            Treatment done
-          </td>
-          <td align="left">
-            <input
-              id="jqxgridSIFIDUrediLxVParametarLxVtreatment_done"
-              class="NextNaEnter"
-            />
-          </td>
-        </tr>
-        <tr>
-          <td align="right" id="jqxgridSIFIDUrediLxVTekstLxVgender">Gender</td>
-          <td align="left">
-            <input
-              id="jqxgridSIFIDUrediLxVParametarLxVgender"
-              class="NextNaEnter"
-            />
-          </td>
-        </tr>
-        <tr>
-          <td align="right" id="jqxgridSIFIDUrediLxVTekstLxVcancer_severity">
-            Cancer severity
-          </td>
-          <td align="left">
-            <input
-              id="jqxgridSIFIDUrediLxVParametarLxVcancer_severity"
-              class="NextNaEnter"
-            />
-          </td>
-        </tr>
-        <tr>
-          <td
-            align="right"
-            id="jqxgridSIFIDUrediLxVTekstLxVfraction_operations"
-          >
-            Fraction operations
-          </td>
-          <td align="left">
-            <input
-              id="jqxgridSIFIDUrediLxVParametarLxVfraction_operations"
-              class="NextNaEnter"
-            />
-          </td>
-        </tr>
-        <tr>
-          <td align="right"></td>
-          <td style="padding-top: 10px" align="left">
-            <input
-              style="margin-right: 5px"
-              type="button"
-              id="jqxgridSIFIDUredivanjeSave"
-              value="Prihvati"
-              class="NextNaEnter"
-            />
-            <input
-              id="jqxgridSIFIDUredivanjeCancel"
-              type="button"
-              value="Odustani"
-            />
-            <p class="errorlabel" style="color: red; display: none">GREŠKA</p>
-          </td>
-        </tr>
-      </table>
-    </div>
-  </div>
-</form>
-<!--NOVO / UREDIVANJE PROZOR END-->
-<!--DESNI KLIK PROZOR START-->
-<div id="jqxgridSIFIDpopupMenu" style="display: none">
-  <div id="jqxgridSIFIDpopupMenuUredi" style="text-align: left">
-    <img
-      style="position: relative; margin-top: 2px"
-      src="../../images/expander.png"
-    /><span style="margin-left: 4px; position: relative; top: -3px">Uredi</span>
-  </div>
-  <div id="jqxgridSIFIDpopupMenuObrisi" style="text-align: left">
-    <img
-      style="position: relative; margin-top: 2px"
-      src="../../images/close.png"
-    /><span style="margin-left: 4px; position: relative; top: -3px"
-      >Obriši</span
-    >
-  </div>
-</div>
-<!--DESNI KLIK PROZOR END-->
-<!--PITANJE KOD BRISANJA START-->
-<div id="jqxgridSIFIDPitanjeBrisanje" style="display: none">
-  <div>
-    <img width="14" height="14" src="../../images/help.png" alt="" />
-    Brisanje
-  </div>
-  <div>
-    <div>Sigurno želite obrisati redak?</div>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Grid</title>
+  </head>
+  <div id="SplitterSIFIDGlavni" style="min-height: 500px">
     <div>
-      <div style="float: right; margin-top: 15px">
-        <input
-          type="button"
-          id="jqxgridSIFIDPitanjeBrisanjeok"
-          value="Obriši"
-          style="margin-right: 10px"
-        />
-        <input
-          type="button"
-          id="jqxgridSIFIDPitanjeBrisanjecancel"
-          value="Odustani"
-        />
+      <!--GRID START-->
+      <div id="jqxgridSIFID"></div>
+      <!--GRID END-->
+    </div>
+    <div>
+      <!--OPCIJE ISPOD GRIDA START-->
+      <div
+        id="jqxgridSIFIDOpcije"
+        style="
+          overflow: hidden;
+          position: relative;
+          display: none;
+          width: 100%;
+          background-color: #e5e5e5;
+          padding: 1px;
+          border-top: 1px solid #cccccc;
+          border-bottom: 1px solid #cccccc;
+        "
+      >
+        <div id="jqxgridSIFIDgumbDodaj" class="lmxjqxbuttonleft">
+          <img
+            style="position: relative; margin-top: 2px"
+            src="../../public/images/icons/images/add.png"
+          /><span class="lmxjqxbuttonspantext">Dodaj</span>
+        </div>
+        <div id="jqxgridSIFIDgumbUredi" class="lmxjqxbuttonleft">
+          <img
+            style="position: relative; margin-top: 2px"
+            src="../../public/images/icons/images/editor.png"
+          /><span class="lmxjqxbuttonspantext">Uredi</span>
+        </div>
+        <div id="jqxgridSIFIDgumbObrisi" class="lmxjqxbuttonleft">
+          <img
+            style="position: relative; margin-top: 2px"
+            src="../../public/images/icons/images/close.png"
+          /><span class="lmxjqxbuttonspantext">Obriši</span>
+        </div>
+        <div id="jqxgridSIFIDgumbIspisi" class="lmxjqxbuttonleft">
+          <img
+            style="position: relative; margin-top: 2px"
+            src="../../public/images/icons/images/card.png"
+          /><span class="lmxjqxbuttonspantext">Ispiši</span>
+        </div>
+        <div
+          id="jqxgridSIFIDStatus"
+          style="float: right; margin-right: 5px"
+        ></div>
+        <div id="jqxgridSIFIDgumbOdaberi" class="lmxjqxbuttonright">
+          <img
+            style="position: relative; margin-top: 2px"
+            src="../../public/images/icons/images/CheckBox.png"
+          /><span class="lmxjqxbuttonspantext">Odaberi</span>
+        </div>
+      </div>
+      <!--OPCIJE ISPOD GRIDA END-->
+    </div>
+  </div>
+
+  <!--NOVO / UREDIVANJE PROZOR START-->
+  <form id="jqxgridSIFIDpopupUredivanjeForma" action="./">
+    <div id="jqxgridSIFIDpopupUredivanje" style="display: none">
+      <div id="jqxgridSIFIDpopupUredivanjeNaslov">Uređivanje</div>
+      <div style="overflow: hidden">
+        <table>
+          <tr style="display: none">
+            <td align="right" id="jqxgridSIFIDUrediLxVTekstLxVpatient_id">
+              Patient ID
+            </td>
+            <td align="left">
+              <input id="jqxgridSIFIDUrediLxVParametarLxVpatient_id" />
+            </td>
+          </tr>
+          <tr>
+            <td align="right" id="jqxgridSIFIDUrediLxVTekstLxVcancer_id">
+              Cancer ID
+            </td>
+            <td align="left">
+              <input
+                id="jqxgridSIFIDUrediLxVParametarLxVcancer_id"
+                class="NextNaEnter"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td
+              align="right"
+              id="jqxgridSIFIDUrediLxVTekstLxVdob"
+              input-type="date"
+            >
+              dob
+            </td>
+            <td align="left">
+              <input
+                id="jqxgridSIFIDUrediLxVParametarLxVdob"
+                class="NextNaEnter"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td align="right" id="jqxgridSIFIDUrediLxVTekstLxVheight">
+              Height
+            </td>
+            <td align="left">
+              <input
+                id="jqxgridSIFIDUrediLxVParametarLxVheight"
+                class="NextNaEnter"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td align="right" id="jqxgridSIFIDUrediLxVTekstLxVweight">
+              Weight
+            </td>
+            <td align="left">
+              <input
+                id="jqxgridSIFIDUrediLxVParametarLxVweight"
+                class="NextNaEnter"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td align="right" id="jqxgridSIFIDUrediLxVTekstLxVtreatment_start">
+              Treatment start
+            </td>
+            <td align="left">
+              <input
+                id="jqxgridSIFIDUrediLxVParametarLxVtreatment_start"
+                class="NextNaEnter"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td align="right" id="jqxgridSIFIDUrediLxVTekstLxVtreatment_done">
+              Treatment done
+            </td>
+            <td align="left">
+              <input
+                id="jqxgridSIFIDUrediLxVParametarLxVtreatment_done"
+                class="NextNaEnter"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td align="right" id="jqxgridSIFIDUrediLxVTekstLxVgender">
+              Gender
+            </td>
+            <td align="left">
+              <input
+                id="jqxgridSIFIDUrediLxVParametarLxVgender"
+                class="NextNaEnter"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td align="right" id="jqxgridSIFIDUrediLxVTekstLxVcancer_severity">
+              Cancer severity
+            </td>
+            <td align="left">
+              <input
+                id="jqxgridSIFIDUrediLxVParametarLxVcancer_severity"
+                class="NextNaEnter"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td
+              align="right"
+              id="jqxgridSIFIDUrediLxVTekstLxVfraction_operations"
+            >
+              Fraction operations
+            </td>
+            <td align="left">
+              <input
+                id="jqxgridSIFIDUrediLxVParametarLxVfraction_operations"
+                class="NextNaEnter"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td align="right"></td>
+            <td style="padding-top: 10px" align="left">
+              <input
+                style="margin-right: 5px"
+                type="button"
+                id="jqxgridSIFIDUredivanjeSave"
+                value="Prihvati"
+                class="NextNaEnter"
+              />
+              <input
+                id="jqxgridSIFIDUredivanjeCancel"
+                type="button"
+                value="Odustani"
+              />
+              <p class="errorlabel" style="color: red; display: none">GREŠKA</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </form>
+  <!--NOVO / UREDIVANJE PROZOR END-->
+  <!--DESNI KLIK PROZOR START-->
+  <div id="jqxgridSIFIDpopupMenu" style="display: none">
+    <div id="jqxgridSIFIDpopupMenuUredi" style="text-align: left">
+      <img
+        style="position: relative; margin-top: 2px"
+        src="../../public/images/icons/images/expander.png"
+      /><span style="margin-left: 4px; position: relative; top: -3px"
+        >Uredi</span
+      >
+    </div>
+    <div id="jqxgridSIFIDpopupMenuObrisi" style="text-align: left">
+      <img
+        style="position: relative; margin-top: 2px"
+        src="../../public/images/icons/images/close.png"
+      /><span style="margin-left: 4px; position: relative; top: -3px"
+        >Obriši</span
+      >
+    </div>
+  </div>
+  <!--DESNI KLIK PROZOR END-->
+  <!--PITANJE KOD BRISANJA START-->
+  <div id="jqxgridSIFIDPitanjeBrisanje" style="display: none">
+    <div>
+      <img
+        width="14"
+        height="14"
+        src="../../public/images/icons/images/help.png"
+        alt=""
+      />
+      Brisanje
+    </div>
+    <div>
+      <div>Sigurno želite obrisati redak?</div>
+      <div>
+        <div style="float: right; margin-top: 15px">
+          <input
+            type="button"
+            id="jqxgridSIFIDPitanjeBrisanjeok"
+            value="Obriši"
+            style="margin-right: 10px"
+          />
+          <input
+            type="button"
+            id="jqxgridSIFIDPitanjeBrisanjecancel"
+            value="Odustani"
+          />
+        </div>
       </div>
     </div>
   </div>
-</div>
-<!--PITANJE KOD BRISANJA END-->
-<script type="text/javascript" src="index.js"></script>
+  <!--PITANJE KOD BRISANJA END-->
+  <script type="text/javascript" src="index.js"></script>
+</html>
