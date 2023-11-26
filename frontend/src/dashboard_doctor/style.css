@@ -169,3 +169,12 @@ jqx-disableselect {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.jqx-scheduler-appointment {
+  border-radius: 5px;
+}
+
+.jqx-scheduler-appointment[appointment-color="#FF0000"] {
+  background-color: #FF0000;
+  color: #FFFFFF; // Setting text color to white for better readability
+}
