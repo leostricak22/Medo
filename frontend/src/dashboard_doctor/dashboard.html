@@ -1,160 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Dashboard</title>
-  <script type="text/javascript" src="../scripts/global.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Example</title>
+    <script type="text/javascript" src="../scripts/global.js"></script>
 
-  <!-- jQuery -->
-  <script src="../../public/jquery/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <!-- jQuery -->
+    <script src="../../public/jquery/jquery-3.6.4.min.js"></script>
 
-  <!-- jQWidgets -->
-  <link
-          rel="stylesheet"
-          href="../../public/jqwidgets/styles/jqx.base.css"
-          type="text/css"
-  />
-  <script src="../../public/jqwidgets/jqx-all.js"></script>
+    <!-- jQWidgets -->
+    <link
+      rel="stylesheet"
+      href="../../public/jqwidgets/styles/jqx.base.css"
+      type="text/css"
+    />
+    <script src="../../public/jqwidgets/jqx-all.js"></script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="navbar">
+        <a href="#" onclick="showDashboard">
+          <img
+            id="dashboard-icon"
+            src="../logo/logo.png"
+            alt="Dashboard Icon"
+          />
+        </a>
 
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-<div id="container">
-  <div id="navbar">
-    <a href="#" onclick="showDashboard">
-      <img
-              id="dashboard-icon"
-              src="images/Mali-leteci-8.png"
-              alt="Dashboard Icon"
-      />
-    </a>
+        <a href="#" onclick="showCalendar">
+          <img
+            id="calendar-icon"
+            src="images/Calendar.png"
+            alt="Calendar Icon"
+          />
+        </a>
 
-    <a href="#" onclick="showCalendar">
-      <img
-              id="calendar-icon"
-              src="images/Calendar.png"
-              alt="Calendar Icon"
-      />
-    </a>
+        <a href="#" onclick="showPatientView">
+          <img id="patient-icon" src="images/User.png" alt="Patient Icon" />
+        </a>
 
-    <a href="#" onclick="showPatientView">
-      <img id="patient-icon" src="images/User.png" alt="Patient Icon" />
-    </a>
-
-    <a href="#" onclick="logout">
-      <img id="logout-icon" src="images/LogOut.png" alt="Logout Icon" />
-    </a>
-  </div>
-</div>
-
-<div id="content-wrapper">
-  <h1>Calendar</h1>
-  <img id="user-image" src="images/doctorSignIn.jpg" alt="User Image" />
-  <div id="scheduler"></div>
-  <!--NOVO / UREDIVANJE PROZOR START-->
-  <div id="calendarWindow">
-    <form id="jqxgridCalendarpopupUredivanjeForma" action="./">
-      <div id="jqxgridCalendarpopupUredivanje" style="display: none">
-        <div id="jqxgridCalendarpopupUredivanjeNaslov">Edit</div>
-        <div style="overflow: hidden">
-          <table>
-            <tr style="display: none">
-              <td
-                      align="right"
-                      id="jqxgridCalendarUrediLxVTekstLxVschedule_id"
-              >
-                Schedule ID
-              </td>
-              <td align="left">
-                <input
-                        id="jqxgridCalendarUrediLxVParametarLxVschedule_id"
-                />
-              </td>
-            </tr>
-            <tr>
-              <td
-                      align="right"
-                      id="jqxgridCalendarUrediLxVTekstLxVschedule_datetime"
-                      input-type="datetime"
-              >
-                Start
-              </td>
-              <td align="left">
-                <input
-                        id="jqxgridCalendarUrediLxVParametarLxVschedule_datetime"
-                        class="NextNaEnter"
-                />
-              </td>
-            </tr>
-            <tr>
-              <td
-                      align="right"
-                      id="jqxgridCalendarUrediLxVTekstLxVpatient_id"
-              >
-                Patient
-              </td>
-              <td align="left">
-                <div
-                        id="jqxgridCalendarUrediLxVParametarLxVpatient_id"
-                        class="NextNaEnter"
-                ></div>
-              </td>
-            </tr>
-            <tr>
-              <td
-                      align="right"
-                      id="jqxgridCalendarUrediLxVTekstLxVmachine_id"
-              >
-                Machine
-              </td>
-              <td align="left">
-                <div
-                        id="jqxgridCalendarUrediLxVParametarLxVmachine_id"
-                        class="NextNaEnter"
-                ></div>
-              </td>
-            </tr>
-            <tr>
-              <td
-                      align="right"
-                      id="jqxgridCalendarUrediLxVTekstLxVduration"
-              >
-                Duration
-              </td>
-              <td align="left">
-                <div
-                        id="jqxgridCalendarUrediLxVParametarLxVduration"
-                        class="NextNaEnter"
-                ></div>
-              </td>
-            </tr>
-
-            <tr>
-              <td align="right"></td>
-              <td style="padding-top: 10px" align="left">
-                <input
-                        style="margin-right: 5px"
-                        type="button"
-                        id="jqxgridCalendarUredivanjeSave"
-                        value="Schedule"
-                        class="NextNaEnter"
-                />
-                <input
-                        id="jqxgridCalendarUredivanjeCancel"
-                        type="button"
-                        value="Cancel"
-                />
-                <p class="errorlabel" style="color: red; display: none">
-                  GREŠKA
-                </p>
-              </td>
-            </tr>
-          </table>
-        </div>
+        <a href="#" onclick="logout">
+          <img id="logout-icon" src="images/LogOut.png" alt="Logout Icon" />
+        </a>
       </div>
-    </form>
-  </div>
-  <script type="text/javascript" src="calendar.js"></script>
-</div>
-</body>
+    </div>
+
+    <div id="content-wrapper">
+      <h1>Calendar</h1>
+      <img id="user-image" src="./images/doctorSignIn.jpg" alt="User Image" />
+      <div id="scheduler"></div>
+      <!--NOVO / UREDIVANJE PROZOR START-->
+      <div id="calendarWindow">
+        <form id="jqxgridCalendarpopupUredivanjeForma" action="./">
+          <div id="jqxgridCalendarpopupUredivanje" style="display: none">
+            <div id="jqxgridCalendarpopupUredivanjeNaslov">Edit</div>
+            <div style="overflow: hidden">
+              <table>
+                <tr style="display: none">
+                  <td
+                    align="right"
+                    id="jqxgridCalendarUrediLxVTekstLxVschedule_id"
+                  >
+                    Schedule ID
+                  </td>
+                  <td align="left">
+                    <input
+                      id="jqxgridCalendarUrediLxVParametarLxVschedule_id"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    align="right"
+                    id="jqxgridCalendarUrediLxVTekstLxVschedule_datetime"
+                    input-type="datetime"
+                  >
+                    Start
+                  </td>
+                  <td align="left">
+                    <input
+                      id="jqxgridCalendarUrediLxVParametarLxVschedule_datetime"
+                      class="NextNaEnter"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    align="right"
+                    id="jqxgridCalendarUrediLxVTekstLxVpatient_id"
+                  >
+                    Patient
+                  </td>
+                  <td align="left">
+                    <div
+                      id="jqxgridCalendarUrediLxVParametarLxVpatient_id"
+                      class="NextNaEnter"
+                    ></div>
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    align="right"
+                    id="jqxgridCalendarUrediLxVTekstLxVmachine_id"
+                  >
+                    Machine
+                  </td>
+                  <td align="left">
+                    <div
+                      id="jqxgridCalendarUrediLxVParametarLxVmachine_id"
+                      class="NextNaEnter"
+                    ></div>
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    align="right"
+                    id="jqxgridCalendarUrediLxVTekstLxVduration"
+                  >
+                    Duration
+                  </td>
+                  <td align="left">
+                    <div
+                      id="jqxgridCalendarUrediLxVParametarLxVduration"
+                      class="NextNaEnter"
+                    ></div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td align="right"></td>
+                  <td style="padding-top: 10px" align="left">
+                    <input
+                      style="margin-right: 5px"
+                      type="button"
+                      id="jqxgridCalendarUredivanjeSave"
+                      value="Schedule"
+                      class="NextNaEnter"
+                    />
+                    <input
+                      id="jqxgridCalendarUredivanjeCancel"
+                      type="button"
+                      value="Cancel"
+                    />
+                    <p class="errorlabel" style="color: red; display: none">
+                      GREŠKA
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </form>
+      </div>
+      <script type="text/javascript" src="calendar.js"></script>
+    </div>
+  </body>
 </html>
