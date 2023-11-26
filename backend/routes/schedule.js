@@ -9,15 +9,14 @@ const scheduleDB = require("../scripts/scheduleData");
 //const userModel = require("../models/userModel")
 
 router.get("/", async function (req, res) {
-	res.send("schedule");
+	let result = await scheduleDB.schedules();
+	res.json(result);
 })
 
 router.post('/', async function (req, res) {
 	const newSchedule = req.body;
-
 	let result = await scheduleDB.insertSchedule(newSchedule);
 	res.json(newSchedule);
-
 });
 
 
@@ -39,11 +38,13 @@ router.get("/:id", async function (req, res) {
 	let result = await scheduleDB.scheduleForUser(patientId["patient_id"]);
 	res.json(result);
 })
-router.get("/generateSchedule/:id", async function (req, res) {
+router.get("/generateSchedule/:id/:duration", async function (req, res) {
 	const userId = req.params.id;
+	const duration = req.params.duration;
+
 	let patientId = await scheduleDB.getPatientId(userId);
 
-	let result = await scheduleDB.generateSchedule(patientId["patient_id"]);
+	let result = await scheduleDB.generateSchedule(patientId["patient_id"],duration);
 	res.json(result);
 })
 
