@@ -40,24 +40,25 @@
         <a href="#" onclick="showPatientView">
           <img id="patient-icon" src="images/User.png" alt="Patient Icon" />
         </a>
-
-        <img
-          style="cursor: pointer"
-          onclick="logout()"
-          id="logout-icon"
-          src="images/LogOut.png"
-          alt="Logout Icon"
-        />
+        <a href="">
+          <img
+            style="cursor: pointer"
+            onclick="logout()"
+            id="logout-icon"
+            src="images/LogOut.png"
+            alt="Logout Icon"
+          />
+        </a>
       </div>
     </div>
 
     <div id="content-wrapper">
       <h1>Calendar</h1>
       <img id="user-image" src="./images/doctorSignIn.jpg" alt="User Image" />
-      <div class="loadercontainer" style="z-index: 2;">
+      <div class="loadercontainer" style="z-index: 2">
         <div class="loader"></div>
       </div>
-      <div id="scheduler" style="z-index: 1;"></div>
+      <div id="scheduler" style="z-index: 1"></div>
       <!--NOVO / UREDIVANJE PROZOR START-->
       <div id="calendarWindow">
         <form id="jqxgridCalendarpopupUredivanjeForma" action="./">
