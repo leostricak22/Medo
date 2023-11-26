@@ -3,7 +3,7 @@ html {
   margin: 0;
   padding: 0;
 
-  width: calc(100% - 100px);
+  width: 100%;
 
   min-height: 100%;
   font-family: "Arial", sans-serif;
@@ -66,7 +66,7 @@ html {
 
 #container {
   height: 100%;
-  width: 100%;
+  width: 190px;
   display: flex;
   flex-direction: column;
 }
@@ -74,7 +74,7 @@ html {
 #content-wrapper {
   background-color: #efefef;
   border-radius: 20px 20px 20px 20px;
-  margin-left: 190px;
+
   margin-right: 20px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -124,4 +124,11 @@ html {
 body {
   margin: 0;
   overflow: hidden;
+}
+
+#grid-container {
+  height: 100%;
+}
+#patient-grid {
+  height: 100%;
 }
