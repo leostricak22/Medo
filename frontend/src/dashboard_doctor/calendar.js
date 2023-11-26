@@ -30,6 +30,8 @@ $(document).ready(async function () {
       $('#scheduler').jqxScheduler('view', 'dayView');
       $('#scheduler').jqxScheduler('view', 'weekView');
 
+      $(".loadercontainer").hide()
+
       $("#scheduler").jqxScheduler("addAppointment", appointment);
       $("#scheduler").on("appointmentClick", function (event) {
         console.log("a");
