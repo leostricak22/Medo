@@ -213,7 +213,7 @@ $(document).ready(async function () {
   $("#jqxgridCalendarUredivanjeSave").jqxButton();
   $("#jqxgridCalendarpopupUredivanje").jqxWindow({
     width: 500,
-    height: 300,
+    height: 200,
     resizable: true,
     isModal: true,
     autoOpen: false,
