@@ -7,6 +7,7 @@ var appointments;
 
 $(document).ready(async function () {
   async function get_all_appointments() {
+    $(".loadercontainer").show()
     const response = await fetch(backend_url + "/schedule");
     let result = await response.json();
 
@@ -234,9 +235,17 @@ $(document).ready(async function () {
 
   $("#jqxgridCalendarUredivanjeSave").on("click", async function () {
     let data_to_send = {};
-    data_to_send["schedule_datetime"] = new Date(
-        $("#jqxgridCalendarUrediLxVParametarLxVschedule_datetime").val()
-    ).getTime();
+    var originalStr = $("#jqxgridCalendarUrediLxVParametarLxVschedule_datetime").val();
+
+    var parts = originalStr.split(' ');
+    var dateParts = parts[0].split('.');
+
+    var formattedDate = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0];
+    var formattedStr = formattedDate + ' ' + parts[1];
+
+    console.log(formattedStr)
+    data_to_send["schedule_datetime"] = new Date(formattedStr).getTime()/1000
+
     data_to_send["patient_id"] =
         patientsall[
             $("#jqxgridCalendarUrediLxVParametarLxVpatient_id").jqxDropDownList(
@@ -249,9 +258,11 @@ $(document).ready(async function () {
                 "selectedIndex"
             )
             ].machine_id;
+
     data_to_send["duration"] = $(
         "#jqxgridCalendarUrediLxVParametarLxVduration"
-    ).jqxDropDownList("selectedItem");
+    ).val()
+
 
     const response = await fetch(backend_url + "/schedule", {
       method: "POST",
@@ -268,6 +279,28 @@ $(document).ready(async function () {
 
     let obj = await response.json();
     $("#jqxgridCalendarpopupUredivanje").jqxWindow("close");
+
+    console.log(data_to_send)
+
+    let appointment = {
+      id: obj.schedule_id,
+      description: "",
+      location: "",
+      subject: patientsall[
+          $("#jqxgridCalendarUrediLxVParametarLxVpatient_id").jqxDropDownList(
+              "selectedIndex"
+          )
+          ].user_fname,
+      calendar: machinedataall[
+          $("#jqxgridCalendarUrediLxVParametarLxVmachine_id").jqxDropDownList(
+              "selectedIndex"
+          )
+          ].machine_id,
+      start: new Date(obj.schedule_datetime*1000),
+      end: new Date((obj.schedule_datetime*1000)+(obj.duration*60*1000))
+    };
+
+    $("#scheduler").jqxScheduler("addAppointment", appointment);
   });
   // UREDIVANJE / NOVO - PODEŠAVANJE POLJA - END
 
