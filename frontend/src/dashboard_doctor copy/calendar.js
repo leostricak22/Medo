@@ -19,10 +19,10 @@ $(document).ready(async function () {
     for(let i=0;i<appointments.length;i++) {
       let appointment = {
         id: appointments[i].schedule_id,
-        description: "",
-        location: "",
-        subject: appointments[i].user_fname,
-        calendar: appointments[i].machine_id,
+        description: "Discuss project milestones",
+        location: "Conference Room",
+        subject: "Project Meeting",
+        calendar: "Work",
         start: new Date(appointments[i].schedule_datetime*1000),
         end: new Date((appointments[i].schedule_datetime*1000)+(appointments[i].duration*60*1000))
       };
@@ -51,8 +51,6 @@ $(document).ready(async function () {
       { name: "calendar", type: "string" },
       { name: "start", type: "datetime" },
       { name: "end", type: "datetime" },
-      { name: "color", type: "string" },
-      { name: "background", type: "string" },
       { name: "patient", type: "string" },
     ],
     id: "id",
@@ -86,12 +84,11 @@ $(document).ready(async function () {
     editDialogOpen: function (dialog, fields, editAppointment) {},
     editDialogClose: function (dialog, fields, editAppointment) {},
     editDialogKeyDown: function (dialog, fields, editAppointment, event) {},
-    resources:
-        {
-          colorScheme: "scheme05",
-          dataField: "calendar",
-          source:  new $.jqx.dataAdapter(source)
-        },
+    resources: {
+      colorScheme: "scheme01",
+      dataField: "calendar",
+      source: new $.jqx.dataAdapter(source),
+    },
     appointmentDataFields: {
       from: "start",
       to: "end",

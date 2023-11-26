@@ -139,10 +139,10 @@ jqx-disableselect {
 }
 
 .loadercontainer {
-  width: 85%;
   border-radius: 20px 20px 20px 20px;
   position: absolute;
-  height: 98%;
+  width: 100%;
+  height: 100%;
   background-color: white;
   text-align: center;
 }
@@ -155,7 +155,7 @@ jqx-disableselect {
   width: 40px;
   height: 40px;
   top: 50%;
-  left: 47%;
+  left: 40%;
 
   text-align: center;
 
@@ -168,13 +168,4 @@ jqx-disableselect {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
-}
-
-.jqx-scheduler-appointment {
-  border-radius: 5px;
-}
-
-.jqx-scheduler-appointment[appointment-color="#FF0000"] {
-  background-color: #FF0000;
-  color: #FFFFFF; // Setting text color to white for better readability
 }
